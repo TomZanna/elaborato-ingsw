@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="loginPage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="350.0" minWidth="400.0" spacing="16.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.questura.passaporti.controller.HelloController">
+   <children>
+      <ImageView fitHeight="113.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/logo.png" />
+         </image>
+      </ImageView>
+      <Label text="Username" />
+      <TextField fx:id="fiscalCode" alignment="CENTER" maxWidth="160.0" promptText="codice fiscale" />
+      <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#clickHandler" text="Login" textAlignment="CENTER" />
+   </children>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+   </padding>
+</VBox>
