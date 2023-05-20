@@ -4,6 +4,7 @@ import it.questura.passaporti.model.Citizen;
 import it.questura.passaporti.repository.CitizenRepository;
 import it.questura.passaporti.utils.FXMLView;
 import it.questura.passaporti.utils.StageManager;
+import it.questura.passaporti.utils.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import lombok.AccessLevel;
@@ -20,13 +21,15 @@ import java.util.Optional;
 public class LoginController {
     private final StageManager stageManager;
     private final CitizenRepository citizenRepository;
+    private final UserSession userSession;
     @FXML
     private TextField fiscalCode;
 
     @Autowired
-    public LoginController(CitizenRepository citizenRepository, StageManager stageManager) {
+    public LoginController(CitizenRepository citizenRepository, StageManager stageManager, UserSession userSession) {
         this.citizenRepository = citizenRepository;
         this.stageManager = stageManager;
+        this.userSession = userSession;
     }
 
     public void clickHandler() {
