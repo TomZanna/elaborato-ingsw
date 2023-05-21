@@ -1,50 +1,29 @@
 package it.questura.passaporti.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
+import java.sql.Date;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Citizen {
-
     @Id
-    @Column
     private String fiscalCode;
+    private Date passportReleaseDate;
+    @Enumerated
+    private PassportState state;
 
-    @Column
     private String name;
-
-    @Column
     private String surname;
-
-    @Column
-    private int birthYear;
-
-    @Column
+    private Date birthDate;
     private String birthPlace;
-
-    @Column
     private String healthInsuranceCardNumber;
-
-    @Column
-    private String finalRelease;
-
-    @Override
-    public String toString() {
-        return "Citizen{" +
-                "fiscalCode='" + fiscalCode + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthYear=" + birthYear +
-                ", birthPlace='" + birthPlace + '\'' +
-                ", healthInsuranceCardNumber='" + healthInsuranceCardNumber + '\'' +
-                ", finalRelease='" + finalRelease + '\'' +
-                '}';
-    }
+    private int categories;
 }

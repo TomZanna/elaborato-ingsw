@@ -1,29 +1,41 @@
 package it.questura.passaporti.controller;
 
 import it.questura.passaporti.model.Citizen;
+import it.questura.passaporti.model.PassportState;
 import it.questura.passaporti.repository.CitizenRepository;
 import it.questura.passaporti.utils.FXMLView;
 import it.questura.passaporti.utils.StageManager;
 import it.questura.passaporti.utils.UserSession;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import net.synedra.validatorfx.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 @Component
 @Scope("prototype") // per evitare il riutilizzo del controller
 @AllArgsConstructor(access = AccessLevel.PRIVATE) // per D.I. durante testing
-public class LoginController {
+public class LoginController implements Initializable {
     private final StageManager stageManager;
     private final CitizenRepository citizenRepository;
     private final UserSession userSession;
+
+    private Alert notFoundPopup;
     @FXML
     private TextField fiscalCode;
+    @FXML
+    private Button loginButton;
 
     @Autowired
     public LoginController(CitizenRepository citizenRepository, StageManager stageManager, UserSession userSession) {
@@ -32,19 +44,51 @@ public class LoginController {
         this.userSession = userSession;
     }
 
-    public void clickHandler() {
-        // cerco codice fiscale
-        Optional<Citizen> c1 = citizenRepository.findById(fiscalCode.getText());
-        // verifico se è presente nel database
-        if (c1.isPresent()) {
-            System.out.println("Cittadino trovato: " + c1);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // regex per i codice fiscali di persone
+        Pattern fiscalCodePatter = Pattern.compile("^([A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z])$");
 
-            // passo alla schermata dei servizi
-            stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
-        } else {
-            System.out.println("User non torvato");
-            // TODO: mostrare un alert/dialog
-        }
+        Validator validator = new Validator();
+        validator.createCheck()
+                .dependsOn("fiscalCode", fiscalCode.textProperty())
+                .withMethod(c -> {
+                    String userInput = c.get("fiscalCode");
+                    if (!userInput.equals("admin") && !fiscalCodePatter.matcher(userInput).find()) {
+                        c.error("Codice fiscale non valido");
+                    }
+                }).decorates(fiscalCode)
+                .immediate();
+        // lego lo stato del bottone alla validità del testo inserito
+        loginButton.disableProperty().bind(validator.containsErrorsProperty());
+
+        notFoundPopup = new Alert(Alert.AlertType.ERROR);
+        notFoundPopup.setHeaderText("Utente non trovato!");
+        notFoundPopup.setContentText("In caso di problemi inviare una segnalazione a questura@italia.it");
     }
 
+    public void clickHandler() {
+        String userInput = fiscalCode.getText();
+
+        // se è admin, vado alla pagina di inserimento
+        if (userInput.equals("admin")) {
+            stageManager.switchScene(FXMLView.INSERT_AVAILABILITY);
+            return;
+        }
+
+        // cerco codice fiscale
+        Optional<Citizen> queryOutput = citizenRepository.findById(userInput);
+
+        // verifico se è presente nel database
+        if (queryOutput.isPresent()) {
+            Citizen citizen = queryOutput.get();
+            userSession.setFromCitizen(citizen);
+
+            if (citizen.getState() == PassportState.NOT_REGISTERED)
+                stageManager.switchScene(FXMLView.CITIZEN_REGISTRATION);
+            else stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
+        } else {
+            notFoundPopup.showAndWait();
+        }
+    }
 }
