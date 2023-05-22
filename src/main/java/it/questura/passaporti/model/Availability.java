@@ -3,8 +3,8 @@ package it.questura.passaporti.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"office", "service", "date", "slot_index"}))
@@ -14,7 +14,7 @@ public class Availability {
     public Office office;
     @Enumerated(EnumType.ORDINAL)
     public ServiceType service;
-    public Date date;
+    public LocalDate date;
     @Column(name = "slot_index")
     public int slotIndex;
     public int freeSlots = 0;
@@ -24,7 +24,7 @@ public class Availability {
     @Getter
     private int id;
 
-    public Time getStartTime() {
+    public LocalTime getStartTime() {
         // TODO: calcolare ora inizio come office.openingTime + (slotIndex * 15 minuti)
         return null;
     }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -23,6 +23,5 @@ public class CitizenAlert {
     public Office office;
     @Enumerated
     public ServiceType service;
-    @Temporal(TemporalType.DATE)
-    public Date date;
+    public LocalDate date;
 }

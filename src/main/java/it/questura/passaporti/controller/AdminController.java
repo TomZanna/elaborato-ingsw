@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 @Component
@@ -35,7 +35,7 @@ public class AdminController implements Initializable {
         Office office = officeRepository.findById(1).orElseThrow();
 
         Availability availability = new Availability();
-        availability.date = new Date(2023, 6, 10);
+        availability.date = LocalDate.now();
         availability.service = ServiceType.WITHDRAW;
         availability.office = office;
         availability.slotIndex = 5;

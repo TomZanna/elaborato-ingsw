@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -16,13 +16,13 @@ import java.sql.Date;
 public class Citizen {
     @Id
     private String fiscalCode;
-    private Date passportReleaseDate;
+    private LocalDate passportReleaseDate;
     @Enumerated
     private PassportState state;
 
     private String name;
     private String surname;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String birthPlace;
     private String healthInsuranceCardNumber;
     private int categories;

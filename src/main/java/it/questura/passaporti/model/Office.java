@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 
 @Entity
@@ -15,7 +15,7 @@ public class Office {
     public String address;
     public int numberOfEmployee;
     public int numberOfTimeSlots;
-    public Time openingTime;
+    public LocalTime openingTime;
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
