@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Component
 @Getter
@@ -15,7 +14,7 @@ import java.util.Date;
 public class UserSession {
     private String fiscalCode;
     private PassportState passportState;
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     public UserSession() {
         this.resetSession();
@@ -24,7 +23,7 @@ public class UserSession {
     public void resetSession() {
         fiscalCode = "";
         passportState = PassportState.NOT_REGISTERED;
-        releaseDate = Date.from(Instant.ofEpochSecond(0));
+        releaseDate = LocalDate.EPOCH;
     }
 
     public void setFromCitizen(Citizen citizen) {
