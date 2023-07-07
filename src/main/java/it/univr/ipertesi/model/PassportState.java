@@ -1,4 +1,4 @@
-package it.questura.passaporti.model;
+package it.univr.ipertesi.model;
 
 public enum PassportState {
     NOT_REGISTERED,

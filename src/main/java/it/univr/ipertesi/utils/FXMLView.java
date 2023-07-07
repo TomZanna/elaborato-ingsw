@@ -1,8 +1,7 @@
-package it.questura.passaporti.utils;
+package it.univr.ipertesi.utils;
 
 public enum FXMLView {
     LOGIN("/views/loginPage.fxml"),
-    CITIZEN_REGISTRATION("/views/registationPage"),
     CITIZEN_SERVICES("/views/citizienServicePage.fxml"),
     INSERT_AVAILABILITY("/views/insertAvailabiltyPage.fxml");
 

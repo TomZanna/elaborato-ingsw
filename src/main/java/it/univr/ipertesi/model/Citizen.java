@@ -1,4 +1,4 @@
-package it.questura.passaporti.model;
+package it.univr.ipertesi.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDate;
-
 @Entity
 @Getter
 @Setter
@@ -16,14 +14,6 @@ import java.time.LocalDate;
 public class Citizen {
     @Id
     private String fiscalCode;
-    private LocalDate passportReleaseDate;
     @Enumerated
     private PassportState state;
-
-    private String name;
-    private String surname;
-    private LocalDate birthDate;
-    private String birthPlace;
-    private String healthInsuranceCardNumber;
-    private int categories;
 }

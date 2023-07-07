@@ -1,11 +1,11 @@
-package it.questura.passaporti.controller;
+package it.univr.ipertesi.controller;
 
-import it.questura.passaporti.model.Citizen;
-import it.questura.passaporti.model.PassportState;
-import it.questura.passaporti.repository.CitizenRepository;
-import it.questura.passaporti.utils.FXMLView;
-import it.questura.passaporti.utils.StageManager;
-import it.questura.passaporti.utils.UserSession;
+import it.univr.ipertesi.model.Citizen;
+import it.univr.ipertesi.model.PassportState;
+import it.univr.ipertesi.repository.CitizenRepository;
+import it.univr.ipertesi.utils.FXMLView;
+import it.univr.ipertesi.utils.StageManager;
+import it.univr.ipertesi.utils.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
 
         notFoundPopup = new Alert(Alert.AlertType.ERROR);
         notFoundPopup.setHeaderText("Utente non trovato!");
-        notFoundPopup.setContentText("In caso di problemi inviare una segnalazione a questura@italia.it");
+        notFoundPopup.setContentText("In caso di problemi inviare una segnalazione a ipertesi@univr.it");
     }
 
     public void clickHandler() {
@@ -84,9 +84,7 @@ public class LoginController implements Initializable {
             Citizen citizen = queryOutput.get();
             userSession.setFromCitizen(citizen);
 
-            if (citizen.getState() == PassportState.NOT_REGISTERED)
-                stageManager.switchScene(FXMLView.CITIZEN_REGISTRATION);
-            else stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
+            stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
         } else {
             notFoundPopup.showAndWait();
         }

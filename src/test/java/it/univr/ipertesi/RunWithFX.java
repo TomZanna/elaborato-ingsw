@@ -4,7 +4,7 @@
  * See LICENSE for details.
  */
 
-package it.questura.passaporti;
+package it.univr.ipertesi;
 
 import javafx.application.Platform;
 import org.junit.jupiter.api.extension.BeforeAllCallback;

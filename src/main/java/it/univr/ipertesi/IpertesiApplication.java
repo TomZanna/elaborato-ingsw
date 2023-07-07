@@ -1,7 +1,7 @@
-package it.questura.passaporti;
+package it.univr.ipertesi;
 
-import it.questura.passaporti.utils.FXMLView;
-import it.questura.passaporti.utils.StageManager;
+import it.univr.ipertesi.utils.FXMLView;
+import it.univr.ipertesi.utils.StageManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
@@ -9,13 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class PassaportiApplication extends Application {
+public class IpertesiApplication extends Application {
     private ConfigurableApplicationContext springContext;
 
     @Override
     public void init() {
         String[] args = getParameters().getRaw().toArray(String[]::new);
-        springContext = SpringApplication.run(PassaportiApplication.class, args);
+        springContext = SpringApplication.run(IpertesiApplication.class, args);
     }
 
     @Override

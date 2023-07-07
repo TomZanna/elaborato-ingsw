@@ -5,6 +5,8 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     show-sql: true
-    hibernate.ddl-auto: create
-    defer-datasource-initialization: true
+    hibernate.ddl-auto: create-drop
     database-platform: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      mode: never

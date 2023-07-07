@@ -1,4 +1,4 @@
-package it.questura.passaporti.utils;
+package it.univr.ipertesi.utils;
 
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
