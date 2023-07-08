@@ -1,62 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.ipertesi.controller.inserimentoDatiPazienteController">
     <children>
-        <Label text="INSERIMENTO DATI" textFill="WHITE">
+        <Label alignment="TOP_LEFT" text="INSERIMENTO DATI" textFill="WHITE">
             <font>
                 <Font name="Arial Bold" size="24.0" />
             </font>
         </Label>
-        <Pane prefHeight="324.0" prefWidth="600.0">
+        <Label alignment="TOP_LEFT" text="Pressione" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets left="15.0" top="10.0" />
+            </VBox.margin>
+        </Label>
+        <HBox prefHeight="45.0" prefWidth="411.0">
             <children>
-                <TextField layoutX="14.0" layoutY="35.0" promptText="Pressione sistolica">
+                <TextField fx:id="textPressioneSistoica" promptText="Pressione sistolica">
                     <cursor>
                         <Cursor fx:constant="TEXT" />
                     </cursor>
+                    <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="5.0" />
+                    </HBox.margin>
                 </TextField>
-                <TextField layoutX="174.0" layoutY="35.0" promptText="Pressione diastolica">
+                <TextField fx:id="textPressioneDistoica" promptText="Pressione diastolica">
                     <cursor>
                         <Cursor fx:constant="TEXT" />
                     </cursor>
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="5.0" />
+                    </HBox.margin>
                 </TextField>
-                <Pane layoutX="14.0" layoutY="119.0" prefHeight="191.0" prefWidth="253.0">
+                <DatePicker fx:id="datepiker" prefHeight="25.0" prefWidth="122.0">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="5.0" />
+                    </HBox.margin>
+                </DatePicker>
+                <TextField fx:id="textOra" prefHeight="25.0" prefWidth="73.0" promptText="Ora">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="5.0" />
+                    </HBox.margin>
+                </TextField>
+            </children>
+            <VBox.margin>
+                <Insets left="15.0" />
+            </VBox.margin>
+        </HBox>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <HBox prefHeight="20.0" prefWidth="600.0">
                     <children>
-                        <Label layoutY="4.0" text="Sintomi" textFill="WHITE">
+                        <Label text="Sintomi" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
                         </Label>
-                        <CheckBox layoutX="15.0" layoutY="96.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="73.0" text="Nausea" textFill="WHITE" />
-                        <CheckBox layoutX="15.0" layoutY="33.0" mnemonicParsing="false" text="Febbre" textFill="WHITE" />
-                        <CheckBox layoutX="15.0" layoutY="64.0" mnemonicParsing="false" text="Mal di testa" textFill="WHITE" />
-                        <TextField editable="false" layoutX="74.0" layoutY="125.0" prefHeight="25.0" prefWidth="140.0" promptText="(Specificare)" />
-                        <CheckBox layoutX="15.0" layoutY="129.0" mnemonicParsing="false" text="Altro" textFill="WHITE" />
                     </children>
-                </Pane>
-                <DatePicker layoutX="334.0" layoutY="35.0" prefHeight="25.0" prefWidth="122.0" />
-                <Label layoutX="14.0" layoutY="14.0" text="Pressione" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <TextField layoutX="466.0" layoutY="35.0" prefHeight="25.0" prefWidth="73.0" promptText="Ora" />
+                    <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <CheckBox fx:id="checkNausea" mnemonicParsing="false" prefHeight="17.0" prefWidth="73.0" text="Nausea" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </VBox.margin>
+                </CheckBox>
+                <CheckBox fx:id="checkFebbre" mnemonicParsing="false" text="Febbre" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </VBox.margin>
+                </CheckBox>
+                <CheckBox fx:id="checkTesta" mnemonicParsing="false" text="Mal di testa" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </VBox.margin>
+                </CheckBox>
+                <HBox prefHeight="28.0" prefWidth="600.0">
+                    <children>
+                        <CheckBox fx:id="checkAltro" mnemonicParsing="false" text="Altro" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets top="10.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                        <TextField fx:id="textAltro" editable="false" prefHeight="0.0" prefWidth="140.0" promptText="(Specificare)">
+                            <HBox.margin>
+                                <Insets left="5.0" top="5.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </TextField>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </VBox.margin>
+                </HBox>
             </children>
-        </Pane>
-        <Pane prefHeight="39.0" prefWidth="346.0">
+        </VBox>
+        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
             <children>
-                <Button layoutX="449.0" layoutY="7.0" mnemonicParsing="false" text="Indietro" textFill="#00a499" />
-                <Button disable="true" layoutX="518.0" layoutY="7.0" mnemonicParsing="false" text="Conferma" textFill="#00a499" />
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="35.0" prefWidth="481.0">
+                    <children>
+                        <Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="25.0" prefWidth="63.0" text="Indietro" textFill="#00a499">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="buttonConferma" disable="true" mnemonicParsing="false" onAction="#accettaHandler" prefHeight="25.0" prefWidth="75.0" text="Conferma" textFill="#00a499">
+                            <HBox.margin>
+                                <Insets left="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="5.0" right="10.0" />
+                    </VBox.margin>
+                </HBox>
             </children>
-        </Pane>
+        </VBox>
     </children>
 </VBox>

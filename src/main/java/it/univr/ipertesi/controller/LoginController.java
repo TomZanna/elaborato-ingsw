@@ -1,6 +1,8 @@
 package it.univr.ipertesi.controller;
 
+import it.univr.ipertesi.model.Doctor;
 import it.univr.ipertesi.model.Patient;
+import it.univr.ipertesi.repository.DoctorRepository;
 import it.univr.ipertesi.repository.PatientRepository;
 import it.univr.ipertesi.utils.FXMLView;
 import it.univr.ipertesi.utils.StageManager;
@@ -26,8 +28,9 @@ import java.util.regex.Pattern;
 @Scope("prototype") // per evitare il riutilizzo del controller
 @AllArgsConstructor(access = AccessLevel.PRIVATE) // per D.I. durante testing
 public class LoginController implements Initializable {
-    private final StageManager stageManager;
     private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
+    private final StageManager stageManager;
     private final UserSession userSession;
 
     private Alert notFoundPopup;
@@ -39,8 +42,9 @@ public class LoginController implements Initializable {
     private Toggle pazienteToggle;
 
     @Autowired
-    public LoginController(PatientRepository patientRepository, StageManager stageManager, UserSession userSession) {
+    public LoginController(PatientRepository patientRepository, DoctorRepository doctorRepository, StageManager stageManager, UserSession userSession) {
         this.patientRepository = patientRepository;
+        this.doctorRepository = doctorRepository;
         this.stageManager = stageManager;
         this.userSession = userSession;
     }
@@ -55,7 +59,7 @@ public class LoginController implements Initializable {
                 .dependsOn("fiscalCode", fiscalCode.textProperty())
                 .withMethod(c -> {
                     String userInput = c.get("fiscalCode");
-                    if (!userInput.equals("admin") && !fiscalCodePatter.matcher(userInput).find()) {
+                    if (!fiscalCodePatter.matcher(userInput).find()) {
                         c.error("Codice fiscale non valido");
                     }
                 }).decorates(fiscalCode)
@@ -71,22 +75,39 @@ public class LoginController implements Initializable {
     public void clickHandler() {
         String userInput = fiscalCode.getText();
 
-        // cerco codice fiscale
+        // cerco codice fiscale nel paziente
         Optional<Patient> queryOutput = patientRepository.findById(userInput);
 
-        // verifico se è presente nel database
-        if (queryOutput.isPresent()) {
-            Patient citizen = queryOutput.get();
-            userSession.setFromCitizen(citizen);
-            if (pazienteToggle.isSelected()) {
-                stageManager.switchScene(FXMLView.HOME_PAGE);
+        // cerco codice fiscale nel dottore
+        Optional<Doctor> queryOutput2 = doctorRepository.findById(userInput);
+
+        // seleziono il paziente
+        if (pazienteToggle.isSelected()) {
+            // eseguo l'interrogazione
+
+            if (queryOutput.isPresent()) {
+
+                Patient patient = queryOutput.get();
+                userSession.setFromPatient(patient);
+                stageManager.switchScene(FXMLView.HOME_PAGE);   // da cambiare con HOME_PAGE_PATIENT
+
             }
             else {
-                stageManager.switchScene(FXMLView.HOME_PAGE_MEDICO);
+                notFoundPopup.showAndWait();
             }
 
-        } else {
-            notFoundPopup.showAndWait();
+        } else if (!pazienteToggle.isSelected()) {
+
+            if (queryOutput2.isPresent()) {
+
+                Doctor doctor = queryOutput2.get();
+                userSession.setFromDoctor(doctor);
+                stageManager.switchScene(FXMLView.HOME_PAGE_MEDICO);
+
+            }
+            else {
+                notFoundPopup.showAndWait();
+            }
         }
     }
 }
