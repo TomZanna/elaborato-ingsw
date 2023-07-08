@@ -54,6 +54,7 @@ public class InserimentoDatiPazienteController {
     }
 
     public void logoutHandler() {
+        userSession.resetSession();
         stageManager.switchScene(FXMLView.LOGIN);
     }
 
