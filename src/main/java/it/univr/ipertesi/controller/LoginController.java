@@ -37,8 +37,6 @@ public class LoginController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-    private ToggleGroup MedicoPaziente;
-    @FXML
     private Toggle pazienteToggle;
 
     @Autowired
@@ -78,16 +76,15 @@ public class LoginController implements Initializable {
         Optional<Citizen> queryOutput = citizenRepository.findById(userInput);
 
         // verifico se è presente nel database
-        if (queryOutput.isPresent() && pazienteToggle.isSelected()) {
+        if (queryOutput.isPresent()) {
             Citizen citizen = queryOutput.get();
             userSession.setFromCitizen(citizen);
-            stageManager.switchScene(FXMLView.HOME_PAGE);
-
-            // imposto la dimensione dello stage prestabilita ed il colore (da creare un metodo)
-            stageManager.getStage().getScene().setFill(Color.valueOf("#00A499"));
-            stageManager.getStage().setMinHeight(350);
-            stageManager.getStage().setMinWidth(350);
-            stageManager.getStage().show();
+            if (pazienteToggle.isSelected()) {
+                stageManager.switchScene(FXMLView.HOME_PAGE);
+            }
+            else {
+                stageManager.switchScene(FXMLView.HOME_PAGE_MEDICO);
+            }
 
         } else {
             notFoundPopup.showAndWait();

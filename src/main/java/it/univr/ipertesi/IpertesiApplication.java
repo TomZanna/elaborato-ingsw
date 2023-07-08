@@ -24,10 +24,6 @@ public class IpertesiApplication extends Application {
     public void start(Stage stage) {
         StageManager stageManager = springContext.getBean(StageManager.class, stage);
         stageManager.switchScene(FXMLView.LOGIN);
-        //stageManager.switchScene(FXMLView.HOME_PAGE);
-        stage.getScene().setFill(Color.valueOf("#00A499"));
-        stage.setMinHeight(400);
-        stage.setMinWidth(400);
         stage.show();
     }
 
