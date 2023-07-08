@@ -54,7 +54,6 @@ class LoginControllerIntegrationTest {
         // inserisco un cittadino nel database
         Patient patient = new Patient();
         patient.setFiscalCode(fiscalCode);
-        patient.setState(PassportState.NOT_REGISTERED);
         patientRepository.save(patient);
 
         // digito il suo codice fiscale
