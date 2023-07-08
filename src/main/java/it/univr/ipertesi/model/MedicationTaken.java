@@ -2,19 +2,23 @@ package it.univr.ipertesi.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class MedicationTaken {
+@Getter
+@Setter
+public class MedicationTaken { // rappresenta l'assunzione di un farmaco
     @Id
-    public int id;
+    private int id;
 
-    @OneToOne
-    public Prescriptions prescription;
+    @ManyToOne
+    private Prescriptions prescription; // farmaco a cui e' legata l'assunzione
 
-    public LocalDateTime dateTime;
+    private LocalDateTime dateTime; // data e ora in cui è stato assunto il farmaco
 
-    public int quantityTaken;
+    private int quantityTaken; // quantità di farmaco assunta
 }

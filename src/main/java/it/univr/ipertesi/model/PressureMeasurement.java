@@ -1,63 +1,46 @@
 package it.univr.ipertesi.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.EnumSet;
-import java.util.Objects;
 
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"PATIENT_ID", "DATETIME"})
-})
-public class PressureMeasurement implements Comparable<PressureMeasurement> {
+@Getter
+@Setter
+public class PressureMeasurement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "PATIENT_ID")
-    public Patient patient; // paziente che ha effettuato la misurazione
-    public LocalDateTime dateTime; // data e ora della misurazione
-    @Transient
-    public EnumSet<Synthom> symptoms; // sintomi percepiti dal paziente
-    public String otherSynthoms; // espande il sintomo "altro"
-    public int diastolicPressure;
-    public int sistolicPressure;
+    private Patient patient; // paziente che ha effettuato la misurazione
+    private LocalDateTime dateTime; // data e ora della misurazione
+
+    private int diastolicPressure;
+    private int sistolicPressure;
+    // sintomi percepiti dal paziente
+    // NON TOCCARE, manipolato da getter/setter di EnumSet<Symptom>
     private int symptomsBitString;
 
-    public int getSymptomsBitString() {
-        int ret = 0;
+    public EnumSet<Symptom> getSymptoms() {
+        EnumSet<Symptom> result = EnumSet.noneOf(Symptom.class);
 
-        for (Synthom val : symptoms) {
-            ret |= (1 << val.ordinal());
+        for (Symptom val : Symptom.values()) {
+            if (((1 << val.getId()) & symptomsBitString) != 0) {
+                result.add(val);
+            }
         }
 
-        return ret;
+        return result;
     }
 
-    public void setSymptomsBitString(int symptomsBitString) {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PressureMeasurement that = (PressureMeasurement) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public int compareTo(PressureMeasurement other) {
-        if (this.id == other.id)
-            return 0;
-
-        // ordinamento in base alla data e ora di misurazione
-        return this.dateTime.compareTo(other.dateTime);
+    public void setSymptoms(EnumSet<Symptom> symptoms) {
+        symptomsBitString = 0;
+        for (Symptom val : symptoms) {
+            symptomsBitString |= (1 << val.getId());
+        }
     }
 }

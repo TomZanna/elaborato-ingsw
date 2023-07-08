@@ -10,27 +10,27 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class UserSession {
-    private String fiscalCode;
-    private boolean isPatient;
+    // contenitore temporaneo per memorizzare paziente e/o dottore
+    private Patient patient;
+    private Doctor doctor;
+    private boolean isPatient; // se l'utente loggato e' paziente (o dottore)
 
     public UserSession() {
         this.resetSession();
     }
 
     public void resetSession() {
-        fiscalCode = "";
+        patient = null;
+        doctor = null;
     }
 
-    public void setFiscalCode(String fiscalCode) {
-        this.fiscalCode = fiscalCode;
+    public void setFromPatient(Patient patient) {
+        this.patient = patient;
+        this.doctor = patient.getDoctor();
     }
 
-    public String getFiscalCode() {
-        return fiscalCode;
+    public void setFromDoctor(Doctor doctor) {
+        this.doctor = doctor;
+        patient = null;
     }
-
-    public void setFromPatient(Patient patient) { fiscalCode = patient.fiscalCode; }
-
-    public void setFromDoctor(Doctor doctor) { fiscalCode = doctor.fiscalCode; }
-
 }

@@ -1,19 +1,22 @@
 package it.univr.ipertesi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Prescriptions {
     @Id
-    public int id;
-    public String name;
-    public int timesPerDay;
-    public int suggestedQuantity;
-    public String indications;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @ManyToOne
     @JoinColumn(name = "therapy_id")
-    public Therapy therapy;
+    public Therapy therapy; // terapia a cui è associato il farmaco
+
+    private String name; // nome del farmaco prescritto
+    private int timesPerDay; // numero di assunzioni giornaliere
+    private int suggestedQuantity; // quantità per assunzione
+    private String indications; // ulteriori indicazioni/istruzioni
 }
