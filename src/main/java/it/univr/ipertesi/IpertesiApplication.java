@@ -22,6 +22,7 @@ public class IpertesiApplication extends Application {
     public void start(Stage stage) {
         StageManager stageManager = springContext.getBean(StageManager.class, stage);
         stageManager.switchScene(FXMLView.LOGIN);
+        //stageManager.switchScene(FXMLView.HOME_PAGE);
         stage.show();
     }
 

@@ -83,8 +83,8 @@ public class LoginController implements Initializable {
         if (queryOutput.isPresent()) {
             Citizen citizen = queryOutput.get();
             userSession.setFromCitizen(citizen);
-
-            stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
+            stageManager.switchScene(FXMLView.HOME_PAGE);
+            //stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
         } else {
             notFoundPopup.showAndWait();
         }
