@@ -1,6 +1,6 @@
 package it.univr.ipertesi.utils;
 
-import it.univr.ipertesi.model.Citizen;
+import it.univr.ipertesi.model.Patient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -19,8 +19,8 @@ public class UserSession {
         fiscalCode = "";
     }
 
-    public void setFromCitizen(Citizen citizen) {
-        fiscalCode = citizen.getFiscalCode();
+    public void setFromCitizen(Patient citizen) {
+        fiscalCode = citizen.fiscalCode;
     }
 
 }

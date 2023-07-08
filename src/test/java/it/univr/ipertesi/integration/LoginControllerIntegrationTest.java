@@ -1,9 +1,8 @@
 package it.univr.ipertesi.integration;
 
 import it.univr.ipertesi.IpertesiApplication;
-import it.univr.ipertesi.model.Citizen;
-import it.univr.ipertesi.model.PassportState;
-import it.univr.ipertesi.repository.CitizenRepository;
+import it.univr.ipertesi.model.Patient;
+import it.univr.ipertesi.repository.PatientRepository;
 import it.univr.ipertesi.utils.FXMLView;
 import it.univr.ipertesi.utils.StageManager;
 import javafx.scene.Node;
@@ -11,11 +10,9 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -26,7 +23,7 @@ import org.testfx.framework.junit5.Start;
 @SpringBootTest(classes = IpertesiApplication.class)
 class LoginControllerIntegrationTest {
     @Autowired
-    CitizenRepository citizenRepository;
+    PatientRepository patientRepository;
     @Autowired
     ConfigurableApplicationContext springContext;
 
@@ -55,10 +52,10 @@ class LoginControllerIntegrationTest {
     void testCitizenRegistered(FxRobot robot) {
         String fiscalCode = "RSSMRA80L05F593A";
         // inserisco un cittadino nel database
-        Citizen citizen = new Citizen();
-        citizen.setFiscalCode(fiscalCode);
-        citizen.setState(PassportState.NOT_REGISTERED);
-        citizenRepository.save(citizen);
+        Patient patient = new Patient();
+        patient.setFiscalCode(fiscalCode);
+        patient.setState(PassportState.NOT_REGISTERED);
+        patientRepository.save(patient);
 
         // digito il suo codice fiscale
         robot.clickOn("#fiscalCode").write(fiscalCode);

@@ -1,8 +1,7 @@
 package it.univr.ipertesi.controller;
 
-import it.univr.ipertesi.model.Citizen;
-import it.univr.ipertesi.model.PassportState;
-import it.univr.ipertesi.repository.CitizenRepository;
+import it.univr.ipertesi.model.Patient;
+import it.univr.ipertesi.repository.PatientRepository;
 import it.univr.ipertesi.utils.FXMLView;
 import it.univr.ipertesi.utils.StageManager;
 import it.univr.ipertesi.utils.UserSession;
@@ -28,7 +27,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor(access = AccessLevel.PRIVATE) // per D.I. durante testing
 public class LoginController implements Initializable {
     private final StageManager stageManager;
-    private final CitizenRepository citizenRepository;
+    private final PatientRepository patientRepository;
     private final UserSession userSession;
 
     private Alert notFoundPopup;
@@ -40,8 +39,8 @@ public class LoginController implements Initializable {
     private Toggle pazienteToggle;
 
     @Autowired
-    public LoginController(CitizenRepository citizenRepository, StageManager stageManager, UserSession userSession) {
-        this.citizenRepository = citizenRepository;
+    public LoginController(PatientRepository patientRepository, StageManager stageManager, UserSession userSession) {
+        this.patientRepository = patientRepository;
         this.stageManager = stageManager;
         this.userSession = userSession;
     }
@@ -73,11 +72,11 @@ public class LoginController implements Initializable {
         String userInput = fiscalCode.getText();
 
         // cerco codice fiscale
-        Optional<Citizen> queryOutput = citizenRepository.findById(userInput);
+        Optional<Patient> queryOutput = patientRepository.findById(userInput);
 
         // verifico se è presente nel database
         if (queryOutput.isPresent()) {
-            Citizen citizen = queryOutput.get();
+            Patient citizen = queryOutput.get();
             userSession.setFromCitizen(citizen);
             if (pazienteToggle.isSelected()) {
                 stageManager.switchScene(FXMLView.HOME_PAGE);
