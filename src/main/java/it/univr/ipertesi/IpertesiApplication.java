@@ -3,6 +3,8 @@ package it.univr.ipertesi;
 import it.univr.ipertesi.utils.FXMLView;
 import it.univr.ipertesi.utils.StageManager;
 import javafx.application.Application;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +25,9 @@ public class IpertesiApplication extends Application {
         StageManager stageManager = springContext.getBean(StageManager.class, stage);
         stageManager.switchScene(FXMLView.LOGIN);
         //stageManager.switchScene(FXMLView.HOME_PAGE);
+        stage.getScene().setFill(Color.valueOf("#00A499"));
+        stage.setMinHeight(400);
+        stage.setMinWidth(400);
         stage.show();
     }
 

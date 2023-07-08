@@ -16,6 +16,10 @@ public class StageManager {
         this.stage = stage;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public void switchScene(final FXMLView view) {
         // carico il nodo
         Parent rootNode = null;

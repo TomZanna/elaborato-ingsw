@@ -8,9 +8,9 @@ import it.univr.ipertesi.utils.StageManager;
 import it.univr.ipertesi.utils.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import net.synedra.validatorfx.Validator;
@@ -36,6 +36,10 @@ public class LoginController implements Initializable {
     private TextField fiscalCode;
     @FXML
     private Button loginButton;
+    @FXML
+    private ToggleGroup MedicoPaziente;
+    @FXML
+    private Toggle pazienteToggle;
 
     @Autowired
     public LoginController(CitizenRepository citizenRepository, StageManager stageManager, UserSession userSession) {
@@ -70,21 +74,21 @@ public class LoginController implements Initializable {
     public void clickHandler() {
         String userInput = fiscalCode.getText();
 
-        // se è admin, vado alla pagina di inserimento
-        if (userInput.equals("admin")) {
-            stageManager.switchScene(FXMLView.INSERT_AVAILABILITY);
-            return;
-        }
-
         // cerco codice fiscale
         Optional<Citizen> queryOutput = citizenRepository.findById(userInput);
 
         // verifico se è presente nel database
-        if (queryOutput.isPresent()) {
+        if (queryOutput.isPresent() && pazienteToggle.isSelected()) {
             Citizen citizen = queryOutput.get();
             userSession.setFromCitizen(citizen);
             stageManager.switchScene(FXMLView.HOME_PAGE);
-            //stageManager.switchScene(FXMLView.CITIZEN_SERVICES);
+
+            // imposto la dimensione dello stage prestabilita ed il colore (da creare un metodo)
+            stageManager.getStage().getScene().setFill(Color.valueOf("#00A499"));
+            stageManager.getStage().setMinHeight(350);
+            stageManager.getStage().setMinWidth(350);
+            stageManager.getStage().show();
+
         } else {
             notFoundPopup.showAndWait();
         }
