@@ -11,7 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +47,16 @@ public class VisualizzazioneStoricoPressioniController implements Initializable 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<PressureMeasurement> list = pressureMeasurementRepository.findAllByPatient(userSession.getPatient());
+
+        tableView.setRowFactory(param -> new TableRow<>() {
+            @Override
+            protected void updateItem(PressureMeasurement item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setBackground(new Background(new BackgroundFill(item.getColor(), null, null)));
+                }
+            }
+        });
 
         TableColumn<PressureMeasurement, LocalDateTime> timestamp = new TableColumn<>("Data e ora");
         timestamp.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getDateTime()));

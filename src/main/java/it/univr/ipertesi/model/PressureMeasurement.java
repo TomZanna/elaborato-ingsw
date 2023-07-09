@@ -1,6 +1,7 @@
 package it.univr.ipertesi.model;
 
 import jakarta.persistence.*;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,24 @@ public class PressureMeasurement {
     // sintomi percepiti dal paziente
     // NON TOCCARE, manipolato da getter/setter di EnumSet<Symptom>
     private int symptomsBitString;
+
+    public Color getColor() {
+        if (diastolicPressure < 90) {
+            if(sistolicPressure < 140) {
+                return Color.LIMEGREEN;
+            } else if (sistolicPressure < 150) {
+                return Color.YELLOW;
+            } else {
+                return Color.ORANGE;
+            }
+        } else if (sistolicPressure < 160) {
+            return Color.ORANGE;
+        } else if (sistolicPressure < 180) {
+            return Color.DARKORANGE;
+        } else {
+            return Color.INDIANRED;
+        }
+    }
 
     public EnumSet<Symptom> getSymptoms() {
         EnumSet<Symptom> result = EnumSet.noneOf(Symptom.class);
