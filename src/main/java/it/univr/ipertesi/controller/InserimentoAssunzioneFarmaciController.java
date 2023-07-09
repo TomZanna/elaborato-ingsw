@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 @Scope("prototype") // per evitare il riutilizzo del controller
 public class InserimentoAssunzioneFarmaciController implements Initializable {
     private final MedicationTakenRepository medicationTakenRepository;
-
     private final UserSession userSession;
     private final StageManager stageManager;
 
@@ -42,13 +41,18 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
     private Spinner<Integer> countField;
     @FXML
     private Button insertButton;
+    @FXML
+    private RadioButton yesRadioButton;
+    @FXML
+    private RadioButton noRadioButton;
+    @FXML
+    private TextArea ifYesTextArea;
 
     public InserimentoAssunzioneFarmaciController(MedicationTakenRepository medicationTakenRepository, UserSession userSession, StageManager stageManager) {
         this.medicationTakenRepository = medicationTakenRepository;
         this.userSession = userSession;
         this.stageManager = stageManager;
     }
-
 
     public void insertMedication() {
         MedicationTaken medicationTaken = new MedicationTaken();
@@ -122,5 +126,22 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
 
         // lego lo stato del bottone alla validità del testo inserito
         insertButton.disableProperty().bind(validator.containsErrorsProperty());
+    }
+
+    public void pulisci() {
+        ifYesTextArea.clear();
+    }
+
+    public void abilita() {
+
+        if (yesRadioButton.isSelected())
+            ifYesTextArea.editableProperty().set(true);
+
+        if (noRadioButton.isSelected()) {
+            ifYesTextArea.editableProperty().set(false);
+            ifYesTextArea.setText("Nessun problema aggiuntivo");
+        }
+        /* da mettere ciò che scrive nel database, ignorare se mette noRadioButton()*/
+
     }
 }
