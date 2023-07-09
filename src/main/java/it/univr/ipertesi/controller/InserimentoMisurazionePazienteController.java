@@ -20,7 +20,7 @@ import java.util.EnumSet;
 
 @Component
 @Scope("prototype") // per evitare il riutilizzo del controller
-public class InserimentoDatiPazienteController {
+public class InserimentoMisurazionePazienteController {
     private final UserSession userSession;
     private final PressureMeasurementRepository pressureMeasurementRepository;
     private final StageManager stageManager;
@@ -47,15 +47,14 @@ public class InserimentoDatiPazienteController {
     @FXML
     private TextField textAltro;
 
-    public InserimentoDatiPazienteController(UserSession userSession, PressureMeasurementRepository pressureMeasurementRepository, StageManager stageManager) {
+    public InserimentoMisurazionePazienteController(UserSession userSession, PressureMeasurementRepository pressureMeasurementRepository, StageManager stageManager) {
         this.userSession = userSession;
         this.pressureMeasurementRepository = pressureMeasurementRepository;
         this.stageManager = stageManager;
     }
 
-    public void logoutHandler() {
-        userSession.resetSession();
-        stageManager.switchScene(FXMLView.LOGIN);
+    public void backToHomeHandler() {
+        stageManager.switchScene(FXMLView.HOME_PAGE_PATIENT);
     }
 
     /*
@@ -80,7 +79,7 @@ public class InserimentoDatiPazienteController {
     }
 
     public void accettaHandler() {
-        stageManager.switchScene(FXMLView.LOGIN);
+        stageManager.switchScene(FXMLView.HOME_PAGE_PATIENT);
     }
 
     public void inserisciMisurazione() {

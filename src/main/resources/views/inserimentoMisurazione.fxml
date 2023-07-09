@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.ipertesi.controller.InserimentoDatiPazienteController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.ipertesi.controller.InserimentoMisurazionePazienteController">
     <children>
         <Label alignment="TOP_LEFT" text="INSERIMENTO DATI" textFill="WHITE">
             <font>
@@ -117,7 +117,7 @@
             <children>
                 <HBox alignment="BOTTOM_RIGHT" prefHeight="35.0" prefWidth="481.0">
                     <children>
-                        <Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="25.0" prefWidth="63.0" text="Indietro" textFill="#00a499">
+                        <Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#backToHomeHandler" prefHeight="25.0" prefWidth="63.0" text="Indietro" textFill="#00a499">
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin>

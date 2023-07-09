@@ -4,8 +4,8 @@ public enum FXMLView {
     LOGIN("/views/loginPage.fxml"),
     HOME_PAGE_PATIENT("/views/homePagePaziente.fxml"),
     HOME_PAGE_DOCTOR("/views/homePageMedico.fxml"),
-    INSERIMENTO_DATI("/views/inserimentoDati.fxml"),
-    ASSUNZIONE_FARMACI("/views/inserimentoAssunzioneFarmaciPaziente.fxml");
+    INSERIMENTO_MISURAZIONE("/views/inserimentoMisurazione.fxml"),
+    ASSUNZIONE_FARMACO("/views/inserimentoAssunzioneFarmaciPaziente.fxml");
 
     public final String fxmlPath;
 
