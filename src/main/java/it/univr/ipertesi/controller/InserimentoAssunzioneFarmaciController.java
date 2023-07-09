@@ -68,6 +68,10 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
                 LocalTime.parse(timeField.getText(), DateTimeFormatter.ofPattern("HH:mm")))
         );
 
+        if (yesRadioButton.isSelected()) {
+            medicationTaken.setReport(ifYesTextArea.getText());
+        }
+
         medicationTakenRepository.save(medicationTaken);
         stageManager.switchScene(FXMLView.HOME_PAGE_PATIENT);
     }
@@ -119,29 +123,15 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
             LocalDate date = context.get("datePicker");
             if (date == null) {
                 context.error("Data non valida");
-            }  else if (date.isAfter(LocalDate.now())) {
+            } else if (date.isAfter(LocalDate.now())) {
                 context.error("Non puoi inserire misurazioni future");
             }
         }).decorates(datePicker).immediate();
 
         // lego lo stato del bottone alla validità del testo inserito
         insertButton.disableProperty().bind(validator.containsErrorsProperty());
-    }
 
-    public void pulisci() {
-        ifYesTextArea.clear();
-    }
-
-    public void abilita() {
-
-        if (yesRadioButton.isSelected())
-            ifYesTextArea.editableProperty().set(true);
-
-        if (noRadioButton.isSelected()) {
-            ifYesTextArea.editableProperty().set(false);
-            ifYesTextArea.setText("Nessun problema aggiuntivo");
-        }
-        /* da mettere ciò che scrive nel database, ignorare se mette noRadioButton()*/
-
+        ifYesTextArea.disableProperty().bind(noRadioButton.selectedProperty());
+        ifYesTextArea.editableProperty().bind(noRadioButton.selectedProperty().not());
     }
 }

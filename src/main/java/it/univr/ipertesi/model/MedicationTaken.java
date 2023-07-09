@@ -20,4 +20,6 @@ public class MedicationTaken { // rappresenta l'assunzione di un farmaco
     private LocalDateTime dateTime; // data e ora in cui è stato assunto il farmaco
 
     private int quantityTaken; // quantità di farmaco assunta
+
+    private String report;
 }
