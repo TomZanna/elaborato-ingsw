@@ -1,19 +1,24 @@
 package it.univr.ipertesi.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 public class Therapy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    private int id;
     @ManyToOne
-    public Patient patient; // paziente sottoposto alla terapia
+    private Patient patient; // paziente sottoposto alla terapia
     @OneToOne
-    public Doctor doctor; // dottore che ha formulato la terapia
-    @OneToMany()
+    private Doctor doctor; // dottore che ha formulato la terapia
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "therapy_id")
-    public Set<Prescriptions> prescriptions; // farmaci che compongono la terapia
+    private List<Prescription> prescriptions; // farmaci che compongono la terapia
 }

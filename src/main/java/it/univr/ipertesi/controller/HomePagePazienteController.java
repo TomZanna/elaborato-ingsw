@@ -2,9 +2,6 @@ package it.univr.ipertesi.controller;
 
 import it.univr.ipertesi.utils.FXMLView;
 import it.univr.ipertesi.utils.StageManager;
-import it.univr.ipertesi.utils.UserSession;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,15 +17,15 @@ public class HomePagePazienteController {
     }
 
     public void handlerDati() {
-            stageManager.switchScene(FXMLView.INSERIMENTO_DATI);
+        stageManager.switchScene(FXMLView.INSERIMENTO_DATI);
     }
 
     public void handlerFarmaci() {
-            stageManager.switchScene(FXMLView.INSERIMENTO_DATI);
+        stageManager.switchScene(FXMLView.ASSUNZIONE_FARMACI);
     }
 
     public void handlerVisualizza() {
-            stageManager.switchScene(FXMLView.INSERIMENTO_DATI);
+        stageManager.switchScene(FXMLView.INSERIMENTO_DATI);
     }
 
 }
