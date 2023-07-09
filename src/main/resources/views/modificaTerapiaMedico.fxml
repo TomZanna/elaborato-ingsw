@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.ipertesi.controller.ModificaTerapiaController">
+    <children>
+        <Label text="MODIFICA TERAPIA" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <ListView fx:id="listViewFarmaci" prefHeight="200.0" prefWidth="200.0">
+            <VBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </VBox.margin>
+        </ListView>
+        <Button fx:id="addMedicineButton" mnemonicParsing="false" text="Aggiungi farmaco" textFill="#00a499">
+            <VBox.margin>
+                <Insets left="20.0" />
+            </VBox.margin>
+        </Button>
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="52.0" prefWidth="600.0">
+            <children>
+                <Button fx:id="cancelButton" onAction="#back" mnemonicParsing="false" text="Annulla" textFill="#00a499" />
+                <Button fx:id="confirmButton" mnemonicParsing="false" text="Conferma" textFill="#00a499">
+                    <HBox.margin>
+                        <Insets left="10.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets left="450.0" right="10.0" top="40.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+</VBox>

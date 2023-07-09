@@ -114,4 +114,9 @@ public class HomePageMedicoController implements Initializable {
         patientsChoiceBox.getSelectionModel().select(0);
 
     }
+
+    public void modifica() {
+        stageManager.switchScene(FXMLView.MODIFICA_TERAPIA);
+    }
+
 }
