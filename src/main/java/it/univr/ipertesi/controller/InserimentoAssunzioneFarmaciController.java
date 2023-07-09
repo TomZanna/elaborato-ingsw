@@ -92,6 +92,8 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
             String userInput = c.get("timeField");
             if (!timeFieldPattern.matcher(userInput).find()) {
                 c.error("Ora non valida");
+            } else if (LocalTime.parse(timeField.getText(), DateTimeFormatter.ofPattern("HH:mm")).isAfter(LocalTime.now())) {
+                c.error("Non puoi inserire misurazioni future");
             }
         }).decorates(timeField).immediate();
 
@@ -113,6 +115,8 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
             LocalDate date = context.get("datePicker");
             if (date == null) {
                 context.error("Data non valida");
+            }  else if (date.isAfter(LocalDate.now())) {
+                context.error("Non puoi inserire misurazioni future");
             }
         }).decorates(datePicker).immediate();
 
