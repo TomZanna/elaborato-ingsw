@@ -26,21 +26,21 @@ public class PressureMeasurement {
     // NON TOCCARE, manipolato da getter/setter di EnumSet<Symptom>
     private int symptomsBitString;
 
-    public Color getColor() {
+    public BloodPressure getBloodPressureCategory() {
         if (diastolicPressure < 90) {
             if(sistolicPressure < 140) {
-                return Color.LIMEGREEN;
+                return BloodPressure.NORMAL;
             } else if (sistolicPressure < 150) {
-                return Color.YELLOW;
+                return BloodPressure.LIGHT_SYSTOLIC_HYPERTENSION;
             } else {
-                return Color.ORANGE;
+                return BloodPressure.SYSTOLIC_HYPERTENSION;
             }
         } else if (sistolicPressure < 160) {
-            return Color.ORANGE;
+            return BloodPressure.HYPERTENSION_GRADE1;
         } else if (sistolicPressure < 180) {
-            return Color.DARKORANGE;
+            return BloodPressure.HYPERTENSION_GRADE2;
         } else {
-            return Color.INDIANRED;
+            return BloodPressure.HYPERTENSION_GRADE3;
         }
     }
 

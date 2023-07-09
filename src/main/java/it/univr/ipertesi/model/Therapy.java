@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -18,7 +18,18 @@ public class Therapy {
     private Patient patient; // paziente sottoposto alla terapia
     @OneToOne
     private Doctor doctor; // dottore che ha formulato la terapia
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "therapy_id")
     private List<Prescription> prescriptions; // farmaci che compongono la terapia
+
+    public void copyFromTherapy(Therapy t) {
+        this.setPatient(t.getPatient());
+        this.setDoctor(t.getDoctor());
+        this.setPrescriptions(t.getPrescriptions().stream().map(prescription -> {
+            Prescription tmp = new Prescription();
+            tmp.copyFrom(prescription);
+            tmp.setTherapy(this);
+            return tmp;
+        }).collect(Collectors.toList()));
+    }
 }
