@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.ipertesi.controller.HomePageMedicoController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00A499;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.ipertesi.controller.HomePageMedicoController">
     <children>
         <Label text="SCHEDA PAZIENTE" textFill="WHITE">
             <font>
@@ -17,77 +17,62 @@
         </Label>
         <Pane prefHeight="363.0" prefWidth="600.0">
             <children>
-                <ChoiceBox layoutX="164.0" layoutY="15.0" prefWidth="150.0" />
+                <ChoiceBox fx:id="patientsChoiceBox" layoutX="164.0" layoutY="15.0" prefWidth="150.0" />
                 <Label layoutX="14.0" layoutY="63.0" text="Cognome" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="14.0" layoutY="90.0" prefHeight="25.0" prefWidth="103.0" />
+                <TextField fx:id="surnameField" editable="false" layoutX="14.0" layoutY="90.0" prefHeight="25.0" prefWidth="103.0" />
                 <Label layoutX="164.0" layoutY="63.0" text="Nome" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="164.0" layoutY="90.0" prefHeight="25.0" prefWidth="103.0" />
+                <TextField fx:id="nameField" editable="false" layoutX="164.0" layoutY="90.0" prefHeight="25.0" prefWidth="103.0" />
                 <Label layoutX="316.0" layoutY="63.0" text="Codice Fiscale" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="316.0" layoutY="90.0" prefHeight="25.0" prefWidth="150.0" />
+                <TextField fx:id="fiscalCodeField" editable="false" layoutX="316.0" layoutY="90.0" prefHeight="25.0" prefWidth="150.0" />
                 <Label layoutX="14.0" layoutY="128.0" text="Medico di riferimento" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="14.0" layoutY="157.0" prefHeight="25.0" prefWidth="150.0" />
+                <TextField fx:id="mainDoctorField" editable="false" layoutX="14.0" layoutY="157.0" prefHeight="25.0" prefWidth="150.0" />
                 <Label layoutX="184.0" layoutY="128.0" text="Ulteriori informazioni" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="184.0" layoutY="157.0" prefHeight="25.0" prefWidth="199.0" />
-                <Label layoutX="17.0" layoutY="199.0" text="Media pressione settimanale:" textFill="WHITE">
+                <TextField fx:id="additionalInfoField" editable="false" layoutX="184.0" layoutY="157.0" prefHeight="25.0" prefWidth="199.0" />
+                <Label layoutX="17.0" layoutY="196.0" text="Statistiche settimanali" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="316.0" layoutY="198.0" prefHeight="25.0" prefWidth="47.0" />
-                <Label layoutX="17.0" layoutY="229.0" text="Media pressione mensile:" textFill="WHITE">
+                <TextField fx:id="meanSistolicField" editable="false" layoutX="291.0" layoutY="210.0" prefHeight="25.0" prefWidth="47.0" />
+                <Label layoutX="187.0" layoutY="216.0" text="sistolica" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="229.0" layoutY="200.0" text="sistolica" textFill="WHITE">
+                <TextField fx:id="maxSistolicField" editable="false" layoutX="477.0" layoutY="210.0" prefHeight="25.0" prefWidth="47.0" />
+                <TextField fx:id="meanDiastolicField" editable="false" layoutX="291.0" layoutY="239.0" prefHeight="25.0" prefWidth="47.0" />
+                <Label layoutX="187.0" layoutY="246.0" text="distolica" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="417.0" layoutY="201.0" text="diastolica" textFill="WHITE">
+                <TextField fx:id="maxDiastolicField" editable="false" layoutX="477.0" layoutY="240.0" prefHeight="25.0" prefWidth="47.0" />
+                <Label layoutX="17.0" layoutY="286.0" text="Sintomi ultima settimana:" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextField editable="false" layoutX="489.0" layoutY="197.0" prefHeight="25.0" prefWidth="47.0" />
-                <TextField editable="false" layoutX="316.0" layoutY="227.0" prefHeight="25.0" prefWidth="47.0" />
-                <Label layoutX="229.0" layoutY="229.0" text="sistolica" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="417.0" layoutY="231.0" text="diastolica" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <TextField editable="false" layoutX="489.0" layoutY="227.0" prefHeight="25.0" prefWidth="47.0" />
-                <Label layoutX="15.0" layoutY="259.0" text="Sintomi ultima settimana:" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <TextField editable="false" layoutX="205.0" layoutY="256.0" prefHeight="25.0" prefWidth="330.0" />
+                <TextField fx:id="recentSymptomsField" editable="false" layoutX="207.0" layoutY="283.0" prefHeight="25.0" prefWidth="330.0" />
                 <Button layoutX="485.0" layoutY="324.0" mnemonicParsing="false" text="Modifica terapia" textFill="#00a499" />
                 <Button fx:id="buttonLogout2" layoutX="12.0" layoutY="324.0" mnemonicParsing="false" onAction="#logoutHandler" text="Logout" textFill="#00a499" />
                 <Label layoutX="14.0" layoutY="17.0" text="Paziente selezionato:" textFill="WHITE">
@@ -95,6 +80,23 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
+            <TextField fx:id="minSistolicField" editable="false" layoutX="386.0" layoutY="210.0" prefHeight="25.0" prefWidth="47.0" />
+            <TextField fx:id="minDiastolicField" editable="false" layoutX="386.0" layoutY="240.0" prefHeight="25.0" prefWidth="47.0" />
+            <Label layoutX="291.0" layoutY="186.0" text="media" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="383.0" layoutY="184.0" text="minima" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="472.0" layoutY="184.0" text="massima" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
     </children>

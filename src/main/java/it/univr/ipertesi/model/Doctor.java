@@ -7,4 +7,10 @@ import lombok.Getter;
 @Getter
 public class Doctor extends User {
     public String email; // email associata al medico
+
+    @Override
+    public String toString() {
+        return getSurname() + " " + getName();
+    }
+
 }

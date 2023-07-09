@@ -15,4 +15,9 @@ public class Patient extends User {
     public String additionalInfo; // informazioni sul paziente compilate dal medico
     @OneToOne
     public Therapy therapy; // terapia che il paziente deve seguire
+
+    @Override
+    public String toString() {
+        return String.format("%s - %s %s", getFiscalCode(), getSurname(), getName());
+    }
 }
