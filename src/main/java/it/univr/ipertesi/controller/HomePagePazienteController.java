@@ -3,6 +3,7 @@ package it.univr.ipertesi.controller;
 import it.univr.ipertesi.utils.FXMLView;
 import it.univr.ipertesi.utils.StageManager;
 import it.univr.ipertesi.utils.UserSession;
+import javafx.scene.control.Alert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,14 @@ public class HomePagePazienteController {
     }
 
     public void handlerInserimentoAssunzioneFarmaco() {
-        stageManager.switchScene(FXMLView.ASSUNZIONE_FARMACO);
+        if (userSession.getPatient().getTherapy() == null) {
+            Alert notFoundPopup = new Alert(Alert.AlertType.INFORMATION);
+            notFoundPopup.setHeaderText("Nessuna terapia!");
+            notFoundPopup.setContentText("Puoi contattare il tuo medico scrivendo a " + userSession.getPatient().getDoctor().getEmail());
+            notFoundPopup.showAndWait();
+        } else {
+            stageManager.switchScene(FXMLView.ASSUNZIONE_FARMACO);
+        }
     }
 
     public void handlerLogout() {
