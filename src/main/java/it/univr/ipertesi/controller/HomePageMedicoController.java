@@ -73,12 +73,12 @@ public class HomePageMedicoController implements Initializable {
         stageManager.switchScene(FXMLView.LOGIN);
     }
 
+    public void showPressureTrend() {
+        stageManager.switchScene(FXMLView.STORICO_PRESSIONI_PAZIENTE);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<Patient> patientList = patientRepository.findAll();
-
-        patientsChoiceBox.setItems(FXCollections.observableList(patientList));
-
         patientsChoiceBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             nameField.setText(newValue.getName());
             surnameField.setText(newValue.getSurname());
@@ -95,7 +95,7 @@ public class HomePageMedicoController implements Initializable {
                     .map(Symptom::getTitle)
                     .collect(Collectors.joining(", "));
 
-            recentSymptomsField.setText(tmp.isBlank() ? "nessuno": tmp);
+            recentSymptomsField.setText(tmp.isBlank() ? "nessuno" : tmp);
 
             IntSummaryStatistics diasolicPressStats = measurements.stream().mapToInt(PressureMeasurement::getDiastolicPressure).summaryStatistics();
             meanDiastolicField.setText(String.valueOf(diasolicPressStats.getAverage()));
@@ -109,9 +109,20 @@ public class HomePageMedicoController implements Initializable {
 
             Doctor newDoc = newValue.getDoctor();
             mainDoctorField.setText(newDoc + (newDoc.equals(userSession.getDoctor()) ? " (tu)" : ""));
+            userSession.setPatient(newValue);
         });
 
-        patientsChoiceBox.getSelectionModel().select(0);
+        List<Patient> patientList = patientRepository.findAll();
+        patientsChoiceBox.setItems(FXCollections.observableList(patientList));
+
+        // se è stato selezionato un paziente (perchè torno da una schermata secondaria)
+        // lo selezione, altrimenti parto dal primo
+        Patient selectedPatient = userSession.getPatient();
+        if (selectedPatient != null) {
+            patientsChoiceBox.getSelectionModel().select(selectedPatient);
+        } else {
+            patientsChoiceBox.getSelectionModel().select(0);
+        }
 
     }
 

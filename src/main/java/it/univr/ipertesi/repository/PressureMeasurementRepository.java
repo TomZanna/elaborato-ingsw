@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface PressureMeasurementRepository extends JpaRepository<PressureMeasurement, Integer> {
     List<PressureMeasurement> findAllByPatientAndDateTimeAfter(Patient patient, LocalDateTime dateTime);
+
+    List<PressureMeasurement> findAllByPatient(Patient patient);
 }
