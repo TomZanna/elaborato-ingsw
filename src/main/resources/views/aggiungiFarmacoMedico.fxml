@@ -80,7 +80,7 @@
                         <Insets right="10.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="confirmButton" alignment="BOTTOM_RIGHT" mnemonicParsing="false" text="Conferma" textFill="#00a499" />
+                <Button fx:id="confirmButton" onAction="#confirm" disable="true" alignment="BOTTOM_RIGHT" mnemonicParsing="false" text="Conferma" textFill="#00a499" />
             </children>
             <VBox.margin>
                 <Insets bottom="10.0" right="10.0" />

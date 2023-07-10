@@ -10,13 +10,17 @@ import it.univr.ipertesi.utils.UserSession;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,6 +36,8 @@ public class ModificaTerapiaController implements Initializable {
     private Button cancelButton;
     @FXML
     private TableView<Prescription> tableViewFarmaci;
+    @FXML
+    private Button addMedicineButton;
 
     public ModificaTerapiaController(StageManager stageManager, UserSession userSession, TherapyRepository therapyRepository, PatientRepository patientRepository) {
         this.stageManager = stageManager;
@@ -86,4 +92,9 @@ public class ModificaTerapiaController implements Initializable {
 
         populateTable();
     }
+
+    public void setScene() {
+        stageManager.switchScene(FXMLView.AGGIUNGI_FARMACO_MEDICO);
+    }
+
 }

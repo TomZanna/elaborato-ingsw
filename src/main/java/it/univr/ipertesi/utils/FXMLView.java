@@ -7,6 +7,7 @@ public enum FXMLView {
     INSERIMENTO_MISURAZIONE("/views/inserimentoMisurazione.fxml"),
     MODIFICA_TERAPIA("/views/modificaTerapiaMedico.fxml"),
     ASSUNZIONE_FARMACO("/views/inserimentoAssunzioneFarmaciPaziente.fxml"),
+    AGGIUNGI_FARMACO_MEDICO("/views/aggiungiFarmacoMedico.fxml"),
     STORICO_PRESSIONI_PAZIENTE("/views/visualizzazioneStoricoPressioni.fxml");
 
     public final String fxmlPath;

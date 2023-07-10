@@ -25,7 +25,7 @@
       </TableView>
       <HBox alignment="CENTER" prefHeight="44.0" prefWidth="560.0">
          <children>
-              <Button fx:id="addMedicineButton" mnemonicParsing="false" text="Aggiungi farmaco" textFill="#00a499" />
+              <Button fx:id="addMedicineButton" onAction="#setScene" mnemonicParsing="false" text="Aggiungi farmaco" textFill="#00a499" />
             <HBox prefHeight="100.0" prefWidth="200.0" />
             <Button fx:id="removeMedicineButton" mnemonicParsing="false" onAction="#removeSelectedMedicine" text="Rimuovi farmaco" textFill="#00a499" />
          </children>

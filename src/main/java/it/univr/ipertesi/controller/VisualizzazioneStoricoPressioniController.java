@@ -10,16 +10,15 @@ import it.univr.ipertesi.utils.UserSession;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +35,6 @@ public class VisualizzazioneStoricoPressioniController implements Initializable 
 
     @FXML
     private TableView<PressureMeasurement> tableView;
-
     public VisualizzazioneStoricoPressioniController(UserSession userSession, PressureMeasurementRepository pressureMeasurementRepository, StageManager stageManager) {
         this.userSession = userSession;
         this.pressureMeasurementRepository = pressureMeasurementRepository;

@@ -82,7 +82,7 @@ public class InserimentoAssunzioneFarmaciController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        countField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 1));
+        countField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
 
         List<Prescription> fetchedList = userSession.getPatient().getTherapy().getPrescriptions();
 
