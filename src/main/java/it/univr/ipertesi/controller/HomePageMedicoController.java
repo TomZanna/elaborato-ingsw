@@ -1,9 +1,6 @@
 package it.univr.ipertesi.controller;
 
-import it.univr.ipertesi.model.Doctor;
-import it.univr.ipertesi.model.Patient;
-import it.univr.ipertesi.model.PressureMeasurement;
-import it.univr.ipertesi.model.Symptom;
+import it.univr.ipertesi.model.*;
 import it.univr.ipertesi.repository.PatientRepository;
 import it.univr.ipertesi.repository.PressureMeasurementRepository;
 import it.univr.ipertesi.utils.FXMLView;
@@ -13,18 +10,22 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Component
 @Scope("prototype") // per evitare il riutilizzo del controller
@@ -59,6 +60,8 @@ public class HomePageMedicoController implements Initializable {
     private TextField maxSistolicField;
     @FXML
     private TextField maxDiastolicField;
+    @FXML
+    private Label warningLabel;
 
     @Autowired
     public HomePageMedicoController(StageManager stageManager, UserSession userSession, PressureMeasurementRepository pressureMeasurementRepository, PatientRepository patientRepository) {
@@ -110,6 +113,18 @@ public class HomePageMedicoController implements Initializable {
             Doctor newDoc = newValue.getDoctor();
             mainDoctorField.setText(newDoc + (newDoc.equals(userSession.getDoctor()) ? " (tu)" : ""));
             userSession.setPatient(newValue);
+
+            Therapy t = newValue.getTherapy();
+            int count = patientRepository.getCount(t.getId());
+
+            int perDay = t.getPrescriptions().stream().mapToInt(Prescription::getTimesPerDay).sum();
+            int daysSinceStart = (int) DAYS.between(t.getStartDate(), LocalDate.now());
+
+            if (count < perDay * (Integer.min(daysSinceStart, 7) - 3)) {
+                warningLabel.setVisible(true);
+            } else {
+                warningLabel.setVisible(false);
+            }
         });
 
         List<Patient> patientList = patientRepository.findAll();
