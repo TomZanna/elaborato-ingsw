@@ -29,6 +29,15 @@ public interface PatientRepository extends JpaRepository<Patient, String> {
             from PRESCRIPTION PS
                      join MEDICATION_TAKEN MT on PS.ID = MT.PRESCRIPTION_ID
             where THERAPY_ID = :therapy
+              and MT.QUANTITY_TAKEN = PS.SUGGESTED_QUANTITY
               and DATE_TIME > dateadd('day', -7, formatdatetime(DATE_TIME, 'yyyy-MM-dd'));""", nativeQuery = true)
     int getCount(int therapy);
+
+    @Query(value = """
+            select COUNT(*)
+            from PRESCRIPTION PS
+                     join MEDICATION_TAKEN MT on PS.ID = MT.PRESCRIPTION_ID
+            where THERAPY_ID = :therapy
+              and DATE_TIME > dateadd('day', -7, formatdatetime(DATE_TIME, 'yyyy-MM-dd'));""", nativeQuery = true)
+    int getTotalCount(int therapy);
 }

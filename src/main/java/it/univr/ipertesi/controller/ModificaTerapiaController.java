@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 @Component
@@ -65,6 +66,7 @@ public class ModificaTerapiaController implements Initializable {
     public void saveTherapy() {
         Therapy t = new Therapy();
         t.copyFromTherapy(userSession.getPatient().getTherapy());
+        t.setStartDate(LocalDate.now());
 
         userSession.getPatient().setTherapy(therapyRepository.save(t));
         patientRepository.save(userSession.getPatient());

@@ -115,12 +115,14 @@ public class HomePageMedicoController implements Initializable {
             userSession.setPatient(newValue);
 
             Therapy t = newValue.getTherapy();
-            int count = patientRepository.getCount(t.getId());
+            int count = patientRepository.getCount(t.getId()); // quante ne ha prese giuste
+            int totalCount = patientRepository.getTotalCount(t.getId()); // quante ne ha prese in totale
 
             int perDay = t.getPrescriptions().stream().mapToInt(Prescription::getTimesPerDay).sum();
             int daysSinceStart = (int) DAYS.between(t.getStartDate(), LocalDate.now());
+            int rightCount = perDay * Integer.max(0, Integer.min(daysSinceStart, 7) - 3); // quante ne dovrebbe prendere
 
-            if (count < perDay * (Integer.min(daysSinceStart, 7) - 3)) {
+            if (count != totalCount || count < rightCount) {
                 warningLabel.setVisible(true);
             } else {
                 warningLabel.setVisible(false);
