@@ -22,10 +22,13 @@
          <VBox.margin>
             <Insets bottom="10.0" left="20.0" right="20.0" />
          </VBox.margin>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <HBox alignment="CENTER" prefHeight="44.0" prefWidth="560.0">
          <children>
-              <Button fx:id="addMedicineButton" onAction="#setScene" mnemonicParsing="false" text="Aggiungi farmaco" textFill="#00a499" />
+              <Button fx:id="addMedicineButton" mnemonicParsing="false" onAction="#setScene" text="Aggiungi farmaco" textFill="#00a499" />
             <HBox prefHeight="100.0" prefWidth="200.0" />
             <Button fx:id="removeMedicineButton" mnemonicParsing="false" onAction="#removeSelectedMedicine" text="Rimuovi farmaco" textFill="#00a499" />
          </children>
