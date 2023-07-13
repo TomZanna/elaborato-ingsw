@@ -43,7 +43,7 @@ public class StageManager {
             scene.setRoot(rootNode);
         }
 
-        stage.setMinHeight(400);
+        stage.setMinHeight(450);
         stage.setMinWidth(800);
         // imposto la dimensione dello stage prestabilita ed il colore (da creare un metodo)
         scene.setFill(Color.valueOf("#00A499"));
