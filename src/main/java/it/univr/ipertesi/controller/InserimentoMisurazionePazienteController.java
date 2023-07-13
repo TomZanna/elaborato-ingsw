@@ -112,7 +112,7 @@ public class InserimentoMisurazionePazienteController implements Initializable {
             }
         }).decorates(textOra).immediate();
 
-        countPressioneDistoica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 1));
+        countPressioneDistoica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
         validator.createCheck().dependsOn("pressioneD", countPressioneSistoica.valueProperty()).withMethod(context -> {
             int count = context.get("pressioneD");
             if (count <= 0) {
@@ -120,7 +120,7 @@ public class InserimentoMisurazionePazienteController implements Initializable {
             }
         }).decorates(countPressioneDistoica).immediate();
 
-        countPressioneSistoica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 1));
+        countPressioneSistoica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
         validator.createCheck().dependsOn("pressioneS", countPressioneSistoica.valueProperty()).withMethod(context -> {
             int count = context.get("pressioneS");
             if (count <= 0) {
