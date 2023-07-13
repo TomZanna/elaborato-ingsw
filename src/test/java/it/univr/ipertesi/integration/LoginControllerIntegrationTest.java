@@ -35,33 +35,72 @@ class LoginControllerIntegrationTest {
     }
 
     @Test
-    void testCitizenNotPresent(FxRobot robot) {
-        String fiscalCode = "RSSMRA80L05F593A";
+    void testPatientNotRegistered(FxRobot robot) {
+        String fiscalCode = "ASSMRA80L05F593A";
 
         // digito il suo codice fiscale
         robot.clickOn("#fiscalCode").write(fiscalCode);
+        robot.clickOn("#pazienteToggle");
         // premo su login
         robot.clickOn("#loginButton");
 
-        // TODO: controllare che venga mostrato un messaggio di errore
         FxAssert.verifyThat("#loginButton", Node::isVisible);
         robot.interact(() -> ((Stage) robot.lookup(".error").query().getScene().getWindow()).close());
     }
 
     @Test
-    void testCitizenRegistered(FxRobot robot) {
-        String fiscalCode = "RSSMRA80L05F593A";
-        // inserisco un cittadino nel database
-        Patient patient = new Patient();
-        patient.setFiscalCode(fiscalCode);
-        patientRepository.save(patient);
+    void testPatientRegistered(FxRobot robot) {
+        String fiscalCode = "VRDLSE99A41F205P";
 
         // digito il suo codice fiscale
         robot.clickOn("#fiscalCode").write(fiscalCode);
+        robot.clickOn("#pazienteToggle");
         // premo su login
         robot.clickOn("#loginButton");
 
         // verifico se è stato effettuato il cambio schermata
-        FxAssert.verifyThat("#issueButton", Node::isVisible);
+        FxAssert.verifyThat("#farmaciButton", Node::isVisible);
+    }
+
+    @Test
+    void testDoctorNotRegistered(FxRobot robot) {
+        String fiscalCode = "ASSMRA80L05F593A";
+
+        // digito il suo codice fiscale
+        robot.clickOn("#fiscalCode").write(fiscalCode);
+        robot.clickOn("#medicoToggle");
+        // premo su login
+        robot.clickOn("#loginButton");
+
+        FxAssert.verifyThat("#loginButton", Node::isVisible);
+        robot.interact(() -> ((Stage) robot.lookup(".error").query().getScene().getWindow()).close());
+    }
+
+    @Test
+    void testDoctorRegistered(FxRobot robot) {
+        String fiscalCode = "BNCRNI85R63A433X";
+
+        // digito il suo codice fiscale
+        robot.clickOn("#fiscalCode").write(fiscalCode);
+        robot.clickOn("#medicoToggle");
+        // premo su login
+        robot.clickOn("#loginButton");
+
+        // verifico se è stato effettuato il cambio schermata
+        FxAssert.verifyThat("#patientsChoiceBox", Node::isVisible);
+    }
+
+    @Test
+    void testFiscalCodeNotValid(FxRobot robot) {
+        String fiscalCode = "ciao";
+
+        // digito il suo codice fiscale
+        robot.clickOn("#fiscalCode").write(fiscalCode);
+        robot.clickOn("#medicoToggle");
+        // premo su login
+        robot.clickOn("#loginButton");
+
+        // verifico se è stato effettuato il cambio schermata
+        FxAssert.verifyThat("#loginButton", Node::isDisabled);
     }
 }

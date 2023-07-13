@@ -22,7 +22,7 @@
         <TextField fx:id="fiscalCode" alignment="CENTER" maxWidth="160.0" promptText="codice fiscale" />
         <Pane prefHeight="33.0" prefWidth="319.0">
             <children>
-                <RadioButton layoutX="116.0" layoutY="10.0" mnemonicParsing="false" text="Medico" textFill="WHITE" fx:id="medico">
+                <RadioButton layoutX="116.0" layoutY="10.0" mnemonicParsing="false" text="Medico" textFill="WHITE" fx:id="medicoToggle">
                     <toggleGroup>
                         <ToggleGroup fx:id="MedicoPaziente"/>
                     </toggleGroup>
