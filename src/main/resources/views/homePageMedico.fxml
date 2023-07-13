@@ -61,7 +61,7 @@
                 </Label>
                 <TextField fx:id="maxSistolicField" editable="false" layoutX="477.0" layoutY="210.0" prefHeight="25.0" prefWidth="47.0" />
                 <TextField fx:id="meanDiastolicField" editable="false" layoutX="291.0" layoutY="239.0" prefHeight="25.0" prefWidth="47.0" />
-                <Label layoutX="187.0" layoutY="246.0" text="distolica" textFill="WHITE">
+                <Label layoutX="187.0" layoutY="246.0" text="diastolica" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

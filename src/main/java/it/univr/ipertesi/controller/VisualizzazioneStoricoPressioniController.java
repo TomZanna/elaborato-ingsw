@@ -75,13 +75,13 @@ public class VisualizzazioneStoricoPressioniController implements Initializable 
         sistolic.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getSistolicPressure()));
         tableView.getColumns().add(sistolic);
 
-        TableColumn<PressureMeasurement, Integer> distolic = new TableColumn<>("P. distolica");
-        distolic.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getDiastolicPressure()));
-        tableView.getColumns().add(distolic);
+        TableColumn<PressureMeasurement, Integer> diastolic = new TableColumn<>("P. diastolica");
+        diastolic.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getDiastolicPressure()));
+        tableView.getColumns().add(diastolic);
 
-        TableColumn<PressureMeasurement, BloodPressure> bloadPressure = new TableColumn<>("Categoria");
-        bloadPressure.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getBloodPressureCategory()));
-        tableView.getColumns().add(bloadPressure);
+        TableColumn<PressureMeasurement, BloodPressure> bloodPressure = new TableColumn<>("Categoria");
+        bloodPressure.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getBloodPressureCategory()));
+        tableView.getColumns().add(bloodPressure);
 
         TableColumn<PressureMeasurement, String> symptoms = new TableColumn<>("Sintomi");
         symptoms.setCellValueFactory(param -> {
